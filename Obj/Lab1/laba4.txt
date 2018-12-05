@@ -1,0 +1,116 @@
+#include <iostream>
+#include <Windows.h>
+#include <string>
+#include <iomanip>
+
+
+using namespace std;
+const int size=20;
+
+class human{
+
+public:
+	string  name;
+	int year;
+	string  sex;
+	
+	void initializationHuman(){
+
+		cout<<"Введіть ПІБ:  ";
+		getline(cin,name);
+		
+		cout<<"Введіть стать:  ";
+		getline(cin,sex);
+
+cout<<"Введіть рік народження:  ";
+		cin>>year;
+	
+	}
+	void showInfaH(){
+   
+	cout<<"ПІБ :  "<<name<<endl<<"Рік народження  :   "<<year<<endl<<"Стать :  "<<sex<<endl;
+	
+	}	
+};
+
+class student  : public human
+{public:
+	int year_Enter; 
+int number;
+int subjects;
+int GPA;
+
+char **subject ;
+int *mark;
+
+
+
+void initializationStudent(){
+cout<<"Введіть рік вступу:  ";
+cin>>year_Enter;
+cout<<"Введіть номер залікової книжки:  ";
+cin>>number;
+cout<<"Введіть кількість предметів:  ";
+cin>>subjects; 
+
+
+
+subject= new char*[subjects];
+	for(int i=0;i<subjects;i++){
+		subject[i]= new char[size];}
+
+ mark=new int [subjects]; 
+ 
+
+   for(int i=0;i<subjects;i++){
+	   int len;
+	   cout<<"Введіть назви предметів (на кожний предмет не більше ніж 20 символів ):  ";
+	   cin>>*(subject+i);
+	  len= strlen(*(subject+i));
+
+	  for(int k=len;k<subjects;k++){
+		  subject[i][k]='\0';   }                                                       
+	    cout<<"Введіть ваш бал з цієї дисципліни (від 1 до 100):  ";
+		cin>>mark[i];}
+   } 
+   
+
+	 
+float Gpa (){float r=0;
+
+  
+	for(int i=0;i<subjects;i++){
+		r+=mark[i];}
+	r/=subjects;
+	
+	return r;
+}
+
+
+  
+void showInfaS(){int k=0;
+cout<<endl<<"Рік вступу :  "<<year_Enter<<endl<<"Номер залікової книжки :  "<<number<<endl<<"Кількість предметів навчання :  "<<subjects<<endl<<endl<<endl;
+cout<<"Порядковий  номер:  "<<setw(22)<<"Предмет:  "<<setw(29)<<" Оцінка:  "<<endl;
+for(int i=0;i<subjects;i++){
+	cout<<i+1<<")"<<"\t"<<setw(20)<<"\t"<<*(subject+i)<<"\t"<<setw(20)<<"\t""\t"<<mark[i]<<"\t""\t"<<endl;
+}cout<<endl;
+cout<<"Ваш середній бал =  "<<  setprecision(2)<<Gpa()<<endl;
+}
+	
+}; 
+int main(){
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	 setlocale(LC_ALL, "Russian");
+
+student Krasavchic;
+Krasavchic.initializationHuman();
+
+Krasavchic.initializationStudent();
+cout<<endl<<endl;
+Krasavchic.showInfaH();
+
+Krasavchic.showInfaS();
+
+system("pause");
+return 0;}
