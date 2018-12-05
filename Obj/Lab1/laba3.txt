@@ -1,0 +1,70 @@
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+class Time {
+private:
+	int hours,  minutes,  seconds;
+public:
+	Time(){
+		hours = 0;
+		minutes = 0;
+		seconds = 0;}
+
+	Time(int hour, int minute, int second){//конструктор
+
+		if((hour>=0)&(hour<=24)&(minute>=0)&(minute<=60)&(second>=0)&(second<=60)){
+			hours=hour;
+	    minutes=minute;
+		seconds=second;}
+	else{hours=0;minutes=0;seconds=0;}
+			}
+
+	void normal(int k){//функція , яка виводить перед числом "0" ,якщо число менше 10
+	if(k<10){cout<<"0";
+	}}
+
+	void showTime(){ // функція виводу
+	cout<<"Поточний час :  " ; normal(hours);cout<<hours <<":";normal(minutes); cout<<minutes<<":";normal(seconds); cout<<seconds<<endl;  
+	
+	}
+
+	void summaTime(int hour0, int min0,int sec0)
+	 {int  day=0;
+sec0=seconds+sec0;
+if(sec0>60){sec0-=60; min0++;}
+min0=minutes+min0;
+ if (min0>60){min0-=60; hour0++;}
+hour0=hours+hour0;
+if(hour0>24){hour0-=24;day++;  }
+cout<<"Результат додавання   :   " <<day <<" День  " ; normal(hour0);  cout<<hour0 <<":";normal(min0); cout<<min0<<":";normal(sec0); cout<<sec0<<endl;  
+}
+	
+};
+int main (){
+	SetConsoleOutputCP(1251);// виводиь кирилицю
+	SetConsoleCP(1251);
+	int hour,  min,sec;
+	int hour0,  min0,sec0;
+
+cout<<"Введiть поточний час "<<endl<<"Година : ";
+	cin>>hour;
+	cout<<"Хвилина : ";
+	cin>>min;
+	cout<<"Секунда : ";
+	cin>>sec;
+
+Time Now(hour,min,sec);
+
+Now.showTime();
+
+cout<<endl<<"Введiть  час, який потрібно додати до поточного  "<<endl<<"Година : "; 
+	cin>>hour0;
+	cout<<"Хвилина : ";
+	cin>>min0;
+	cout<<"Секунда : ";
+	cin>>sec0;
+	 
+	Now.summaTime(hour0,  min0,sec0);
+
+system("pause");// для того, щоб не закривало зразу консольку , після виконання програми:)
+return 0;}
